@@ -7,31 +7,56 @@
     <%= csp_meta_tag %>
 
     <script src="https://kit.fontawesome.com/b82d817675.js" crossorigin="anonymous"></script>
-    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="flex-column">
     <header>
-    <% if user_signed_in? %>
-      <li>
-        <%= link_to "Log out", destroy_user_session_path, method: :delete %>
-      </li>
-    <% else %>
-      <li>
-        <%= link_to "Home", root_path %>
-      </li>
-      <li>
-        <%= link_to "About", about_path %>
-      </li>
-      <li>
-        <%= link_to "Sign up", new_user_registration_path %>
-      </li>
-      <li>
-        <%= link_to "Log in", new_user_session_path %>
-      </li>
-    <% end %>
-  </header>
+      <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #2b2b2b;">
+        <div class="container-fluid">
+          <%= link_to "Bookers", root_path, class: 'nav-link text-white navbar-brand' %>
+          <button class="navbar-toggler" style="background-color: white;" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+              <% if user_signed_in? %>
+                <li class="nav-item">
+                  <%= link_to root_path, class: 'nav-link text-white' do %>
+                    <i class="fa-solid fa-house"></i>Home
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "Log out", destroy_user_session_path, method: :delete, class: 'nav-link text-white' %>
+                </li>
+              <% else %>
+                <li class="nav-item">
+                  <%= link_to root_path, class: 'nav-link text-white' do %>
+                  <i class="fa-solid fa-house"></i>Home
+                <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to about_path, class: 'nav-link text-white' do %>
+                  <i class="fa-solid fa-link"></i>About
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to new_user_registration_path, class: 'nav-link text-white' do %>
+                  <i class="fa-solid fa-user-plus"></i>Sign up
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to new_user_session_path, class: 'nav-link text-white' do %>
+                  <i class="fa-solid fa-right-to-bracket"></i>Log in
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
     <%= yield %>
   </body>
 </html>
